@@ -1,0 +1,17 @@
+
+
+
+commande pour scaffold
+
+dotnet ef dbcontext scaffold Name=BDRevelstokeMountainResort Microsoft.EntityFrameworkCore.SqlServer -o Models --context-dir Data --data-annotations --force
+
+
+
+commande pour migration 
+
+evolve migrate sqlserver -c "Data Source=.;Initial Catalog=RevelstokeMountainResort;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False" -s Clients -s Versants --target-version 1.0
+
+
+3) Mettre à jour pour la version prerelease qui fonctionne avec .Net 8.0
+
+dotnet tool update evolve.tool -g --prerelease

@@ -1,0 +1,69 @@
+﻿@model ProjetFinal_2386452.Models.Piste
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Piste</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Longeur)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Longeur) m
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Difficulte)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.Difficulte == "Vert")
+            {
+                <p>🟢</p>
+            }
+            @if (Model.Difficulte == "Bleu")
+            {
+                <p>🟦</p>
+            }
+            @if (Model.Difficulte == "Noir")
+            {
+                <p>◆</p>
+            }
+            @if (Model.Difficulte == "Double Noir")
+            {
+                <p>◆◆</p>
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EstSousBois)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.EstSousBois)
+            {
+                <p>🌲</p>
+            }
+            @if(!Model.EstSousBois)
+            {
+                <p>✖</p>
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Versant)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Versant.Nom)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

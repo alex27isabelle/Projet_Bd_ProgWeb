@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ProjetFinal_2386452.Models.Remontee>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Nom)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Longeur)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TempEnMinute)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Vitesse)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NbPylone)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Type)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.AnneeConstruction)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Photo)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Versant)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Nom)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Longeur) m
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TempEnMinute) min
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Vitesse) m/s
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.NbPylone)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Type)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.AnneeConstruction)
+				</td>
+				<td>
+					@if (item.Photo != null && item.Photo.Length > 0)
+					{
+						string imageBase64 = Convert.ToBase64String(item.Photo);
+						string imageSrc = String.Format("data:image/png;base64,{0}", imageBase64);
+						<img src="@imageSrc" alt="Photo de la remontée" style="max-width:300px;" />
+					}
+					else
+					{
+						<p><em>Aucune photo disponible.</em></p>
+					}
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Versant.Nom)
+				</td>
+				<td>
+					<a asp-action="Details" asp-route-id="@item.RemonteeId">Details</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

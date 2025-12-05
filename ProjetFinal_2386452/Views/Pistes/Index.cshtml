@@ -1,0 +1,89 @@
+﻿@model ProjetFinal_2386452.ViewModels.PisteVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<p><a asp-action="Inscription" asp-controller="Pistes">Inscription</a></p>
+<p><a asp-action="Connexion" asp-controller="Pistes">Connexion</a></p>
+
+<p>Bonjour @ViewData["PrenomNom"] !</p>
+
+<p><a asp-action="Deconnexion" asp-controller="Pistes">Déconnexion</a></p>
+
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <label for="Nom">Nom</label>
+        <input type="text" id="Nom" name="Nom" class="form-control" value="@Model.Filtre.Nom" />
+    </div>
+    <div class="form-group">
+        <label for="Difficulte">Difficulté</label>
+        <select id="Difficulte" name="Difficulte" class="form-control" asp-for="Filtre.Difficulte" asp-items="Model.DifficulteOptions">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="EstSousBois">Sous Bois</label>
+        <input type="checkbox" id="EstSousBois" name="EstSousBois" value="true" @(Model.Filtre.EstSousBois == true ? "checked" : "") />
+    </div>
+
+    <div class="form-group">
+        <label for="LongeurMin">Longueur Minimum</label>
+        <input type="number" id="LongeurMin" name="LongeurMin" class="form-control" value="@Model.Filtre.LongeurMin" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Pistes.FirstOrDefault().Nom)</th>
+            <th>@Html.DisplayNameFor(model => model.Pistes.FirstOrDefault().Longeur)</th>
+            <th>@Html.DisplayNameFor(model => model.Pistes.FirstOrDefault().Difficulte)</th>
+            <th>@Html.DisplayNameFor(model => model.Pistes.FirstOrDefault().EstSousBois)</th>
+            <th>@Html.DisplayNameFor(model => model.Pistes.FirstOrDefault().Versant)</th>
+            <th>@Html.DisplayNameFor(model => model.Pistes.FirstOrDefault().NombreDeDecente)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pistes)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Nom)</td>
+                <td>@Html.DisplayFor(modelItem => item.Longeur) m</td>
+                <td>
+                    @if (item.Difficulte == "Vert")
+                    {
+                        <p>🟢</p>
+                    }
+                    @if (item.Difficulte == "Bleu")
+                    {
+                        <p>🟦</p>
+                    }
+                    @if (item.Difficulte == "Noir")
+                    {
+                        <p>◆</p>
+                    }
+                    @if (item.Difficulte == "Double Noir")
+                    {
+                        <p>◆◆</p>
+                    }
+                </td>
+                <td>
+                    @if (item.EstSousBois)
+                    {
+                        <p>🌲</p>
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Versant)</td>
+                <td>@Html.DisplayFor(modelItem => item.NombreDeDecente)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.PisteId">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
